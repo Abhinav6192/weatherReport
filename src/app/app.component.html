@@ -1,0 +1,40 @@
+<div class="headTitle eachElement">
+  <h1>Weather Forecast</h1>
+</div>
+
+<div class="report">
+  <div class="eachElement">
+    <label>Name of Your City</label>
+    <input type="text" #city/>
+  </div>
+  <div class="eachElement">
+    <label>select the unit you want to see the temperature in</label>
+    <select #unit>
+      <option>Kelvin</option>
+      <option>Degrees</option>
+      <option>Fahrenheit</option>
+    </select>
+  </div>
+</div>
+
+<div>
+  <button (click)="getWeatherReport(city, unit)">Get Weather Report</button>
+</div>
+
+<div class="report" *ngIf="weatherData else noData">
+  <div class="headTitle">
+    <h3>Weather Report</h3>
+  </div>
+  <div class="report">
+    <div class="eachElement" *ngFor="let item of weatherData">
+      <div [innerText]="item.dt_txt"></div>
+      <div>it is {{item.main.temp}} but feels like {{item.main.feels_like}}</div>
+      <div>it is {{item.weather[0].description}}</div>
+    </div>
+  </div>
+</div>
+<ng-template #noData>
+  <div class="report">
+    <h3>No Data Available</h3>
+  </div>
+</ng-template>
